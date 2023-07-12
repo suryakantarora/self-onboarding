@@ -1,0 +1,7 @@
+{
+  "name": "self-onboard",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
