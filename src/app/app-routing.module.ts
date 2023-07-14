@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'select-dob',
+    loadChildren: () => import('./select-dob/select-dob.module').then( m => m.SelectDobPageModule)
+  },
 ];
 
 @NgModule({

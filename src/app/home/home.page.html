@@ -1,20 +1,368 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <app-stepper [activeIndex]="stepperIndex" (clickedTab)="changeStepperIndex($event)"></app-stepper>
   </ion-toolbar>
+  <!--   <ion-toolbar>
+    <ion-title>
+      Employee Registration
+    </ion-title>
+  </ion-toolbar> -->
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <div [ngSwitch]="stepperIndex">
+    <div *ngSwitchCase="'1'">
+      <form [formGroup]="personalDetailForm">
+        <ion-card mode="md">
+          <ion-card-header>
+            <ion-card-title>Personal Details</ion-card-title>
+            <ion-card-subtitle><ion-text color="danger">*</ion-text> Fields are mandatory</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-row>
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <div class="form-field">
+                  <ion-input fill="outline" type="text" labelPlacement="floating" placeholder="Enter your firstname"
+                    errorText="Invalid First Name" formControlName="firstName">
+                    <div slot="label">First Name <ion-text color="danger">*</ion-text></div>
+                  </ion-input>
+                </div>
+              </ion-col>
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <div class="form-field">
+                  <ion-input fill="outline" type="text" labelPlacement="floating" placeholder="Enter your lastname"
+                    errorText="Invalid Last Name" formControlName="lastName">
+                    <div slot="label">Last Name <ion-text color="danger">*</ion-text></div>
+                  </ion-input>
+                </div>
+              </ion-col>
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <div class="form-field">
+                  <ion-input fill="outline" type="text" labelPlacement="floating" placeholder="Enter your father name"
+                    errorText="Invalid Father Name" formControlName="fatherName">
+                    <div slot="label">Father Name <ion-text color="danger">*</ion-text></div>
+                  </ion-input>
+                </div>
+              </ion-col>
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <div class="form-field">
+                  <ion-input fill="outline" type="text" labelPlacement="floating" placeholder="Enter your mother name"
+                    errorText="Invalid Mother Name" formControlName="motherName">
+                    <div slot="label">Mother Name <ion-text color="danger">*</ion-text></div>
+                  </ion-input>
+                </div>
+              </ion-col>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <div class="form-field">
+                  <!-- <ion-label>Gender <ion-text color="danger">*</ion-text></ion-label> -->
+                  <ion-item lines="none">
+                    <ion-radio-group formControlName="gender" errortext="Invalid Gender" style="width:100%">
+                      <ion-row>
+                        <ion-col size="6">
+                          <ion-radio value="M" labelPlacement="end" justify="start">Male</ion-radio>
+                        </ion-col>
+                        <ion-col size="6">
+                          <ion-radio value="F" labelPlacement="end" justify="start">Female</ion-radio>
+                        </ion-col>
+                      </ion-row>
+                    </ion-radio-group>
+                  </ion-item>
+                </div>
+              </ion-col>
+
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <div class="form-field">
+                  <ion-input fill="outline" formControlName="dob" placeholder="Select your DOB"
+                    labelPlacement="floating" (click)="openDob('dob')">
+                    <div slot="label"> DOB <ion-text color="danger">*</ion-text></div>
+                  </ion-input>
+                </div>
+              </ion-col>
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <div class="form-field">
+                  <ion-input fill="outline" type="text" labelPlacement="floating" placeholder="Enter your mobile no."
+                    errorText="Invalid Mobile No." formControlName="mobile">
+                    <div slot="label">Mobile No. <ion-text color="danger">*</ion-text></div>
+                  </ion-input>
+                </div>
+              </ion-col>
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <div class="form-field">
+                  <ion-input fill="outline" type="text" labelPlacement="floating" placeholder="Enter your Email Id"
+                    errorText="Invalid Email ID" formControlName="email">
+                    <div slot="label">Email ID <ion-text color="danger">*</ion-text></div>
+                  </ion-input>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </form>
+    </div>
+    <div *ngSwitchCase="'2'">
+      <form [formGroup]="resdentialDetailForm">
+        <ion-card mode="md">
+          <ion-card-header>
+            <ion-card-title>Residential Address</ion-card-title>
+            <ion-card-subtitle><ion-text color="danger">*</ion-text> Fields are mandatory</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-row>
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <div class="form-field">
+                  <ion-input fill="outline" type="text" labelPlacement="floating"
+                    placeholder="Enter your Door no./Street" errorText="Invalid Door/Street" formControlName="doorNo">
+                    <div slot="label">Door No. / Street <ion-text color="danger">*</ion-text></div>
+                  </ion-input>
+                </div>
+              </ion-col>
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <div class="form-field">
+                  <ion-input fill="outline" type="text" labelPlacement="floating" placeholder="Enter your village"
+                    errorText="Invalid Village" formControlName="village">
+                    <div slot="label">Village <ion-text color="danger">*</ion-text></div>
+                  </ion-input>
+                </div>
+              </ion-col>
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <div class="form-field">
+                  <ion-input fill="outline" type="text" labelPlacement="floating" placeholder="Enter your city"
+                    errorText="Invalid City" formControlName="city">
+                    <div slot="label">City <ion-text color="danger">*</ion-text></div>
+                  </ion-input>
+                </div>
+              </ion-col>
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <div class="form-field">
+                  <ion-input fill="outline" type="text" labelPlacement="floating" placeholder="Enter your district"
+                    errorText="Invalid District" formControlName="district">
+                    <div slot="label">District <ion-text color="danger">*</ion-text></div>
+                  </ion-input>
+                </div>
+              </ion-col>
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <div class="form-field">
+                  <ion-input fill="outline" type="text" labelPlacement="floating" placeholder="Enter your state"
+                    errorText="Invalid State" formControlName="state">
+                    <div slot="label">State <ion-text color="danger">*</ion-text></div>
+                  </ion-input>
+                </div>
+              </ion-col>
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <div class="form-field">
+                  <ion-input fill="outline" type="text" labelPlacement="floating" readonly
+                    placeholder="Enter your country" errorText="Invalid country" formControlName="country">
+                    <div slot="label">Country <ion-text color="danger">*</ion-text></div>
+                  </ion-input>
+                </div>
+              </ion-col>
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <div class="form-field">
+                  <ion-input fill="outline" type="text" labelPlacement="floating" placeholder="Enter your zip code"
+                    errorText="Invalid Zip Code" formControlName="zipCode">
+                    <div slot="label">Zip Code <ion-text color="danger">*</ion-text></div>
+                  </ion-input>
+                </div>
+              </ion-col>
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <ion-item lines="none">
+                  <ion-toggle color="primary" mode="md" class="ion-text-wrap" formControlName="resCommAddrresSame"
+                    (ngModelChange)="checkResCommAddrresSame($event)">
+                    Is communication address same?
+                  </ion-toggle>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </form>
+      <form [formGroup]="communicationDetailForm" *ngIf="resdentialDetailForm.controls.resCommAddrresSame.value">
+        <ion-card mode="md">
+          <ion-card-header>
+            <ion-card-title>Communication Address</ion-card-title>
+            <ion-card-subtitle><ion-text color="danger">*</ion-text> Fields are mandatory</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-row>
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <div class="form-field">
+                  <ion-input fill="outline" type="text" labelPlacement="floating"
+                    placeholder="Enter your Door no./Street" errorText="Invalid Door/Street" formControlName="doorNo">
+                    <div slot="label">Door No. / Street <ion-text color="danger">*</ion-text></div>
+                  </ion-input>
+                </div>
+              </ion-col>
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <div class="form-field">
+                  <ion-input fill="outline" type="text" labelPlacement="floating" placeholder="Enter your village"
+                    errorText="Invalid Village" formControlName="village">
+                    <div slot="label">Village <ion-text color="danger">*</ion-text></div>
+                  </ion-input>
+                </div>
+              </ion-col>
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <div class="form-field">
+                  <ion-input fill="outline" type="text" labelPlacement="floating" placeholder="Enter your city"
+                    errorText="Invalid City" formControlName="city">
+                    <div slot="label">City <ion-text color="danger">*</ion-text></div>
+                  </ion-input>
+                </div>
+              </ion-col>
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <div class="form-field">
+                  <ion-input fill="outline" type="text" labelPlacement="floating" placeholder="Enter your district"
+                    errorText="Invalid District" formControlName="district">
+                    <div slot="label">District <ion-text color="danger">*</ion-text></div>
+                  </ion-input>
+                </div>
+              </ion-col>
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <div class="form-field">
+                  <ion-input fill="outline" type="text" labelPlacement="floating" placeholder="Enter your state"
+                    errorText="Invalid State" formControlName="state">
+                    <div slot="label">State <ion-text color="danger">*</ion-text></div>
+                  </ion-input>
+                </div>
+              </ion-col>
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <div class="form-field">
+                  <ion-input fill="outline" type="text" labelPlacement="floating" readonly
+                    placeholder="Enter your country" errorText="Invalid country" formControlName="country">
+                    <div slot="label">Country <ion-text color="danger">*</ion-text></div>
+                  </ion-input>
+                </div>
+              </ion-col>
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <div class="form-field">
+                  <ion-input fill="outline" type="text" labelPlacement="floating" placeholder="Enter your zip code"
+                    errorText="Invalid Zip Code" formControlName="zipCode">
+                    <div slot="label">Zip Code <ion-text color="danger">*</ion-text></div>
+                  </ion-input>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </form>
+    </div>
+
+    <div *ngSwitchCase="'3'">
+      <form [formGroup]="professionalDetailForm">
+        <ion-card mode="md">
+          <ion-card-header>
+            <ion-card-title>Professional Detail</ion-card-title>
+            <ion-card-subtitle><ion-text color="danger">*</ion-text> Fields are mandatory</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-row>
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <div class="form-field">
+                  <ion-select label="Department" label-placement="floating" fill="outline">
+                    <ion-select-option [value]="d.deptId" *ngFor="let d of deptList">{{d.deptName}}</ion-select-option>
+                  </ion-select>
+                </div>
+              </ion-col>
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <div class="form-field" (click)="openDob('doj')">
+                  <ion-input fill="outline" formControlName="doj" placeholder="Select your DOJ"
+                    labelPlacement="floating">
+                    <div slot="label"> Date of joining <ion-text color="danger">*</ion-text></div>
+                  </ion-input>
+                </div>
+              </ion-col>
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <div class="form-field" (click)="openDob('doc')">
+                  <ion-input fill="outline" formControlName="doc" placeholder="Select your DOC"
+                    labelPlacement="floating">
+                    <div slot="label"> Date of confirmation <ion-text color="danger">*</ion-text></div>
+                  </ion-input>
+                </div>
+              </ion-col>
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <div class="form-field">
+                  <ion-select label-placement="floating" fill="outline" formControlName="prevEmployer">
+                    <div slot="label"> Employement Type <ion-text color="danger">*</ion-text></div>
+                    <ion-select-option value="FRESHER"> Fresher </ion-select-option>
+                    <ion-select-option value="EXP"> Experience </ion-select-option>
+                  </ion-select>
+                </div>
+              </ion-col>
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <div class="form-field">
+                  <ion-input fill="outline" type="text" labelPlacement="floating" placeholder="Enter previous employer"
+                    errorText="Invalid Employer" formControlName="prevEmployer">
+                    <div slot="label">Previous Employer <ion-text color="danger">*</ion-text></div>
+                  </ion-input>
+                </div>
+              </ion-col>
+              <ion-col size-lg="4" size-md="6" size-sm="12" size-xs="12">
+                <div class="form-field">
+                  <ion-input fill="outline" type="text" labelPlacement="floating" placeholder="Enter total experience"
+                    errorText="Invalid Employer" formControlName="totalExp">
+                    <div slot="label">Total Experience <ion-text color="danger">*</ion-text></div>
+                  </ion-input>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </form>
+    </div>
+    <div *ngSwitchCase="'4'">
+      <ion-card class="ion-text-center">
+        <img [src]="selectedImage" class="picture">
+        <ion-card-content>
+          <ion-row mode="md">
+            <ion-col size="6">
+              <ion-button fill="outline" expand="block" class="ion-text-capitalize" (click)="openCamera(0)"> Select
+                Picture </ion-button>
+            </ion-col>
+            <ion-col size="6">
+              <ion-button expand="block" class="ion-text-capitalize" (click)="openCamera(1)"> Open Camera </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <div *ngSwitchCase="'5'">
+      <div class="success-box">
+        <ion-card class="ion-padding">
+          <img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" class="success-icon">
+          <ion-item lines="none">
+            <ion-label class="ion-text-wrap ion-text-center">
+              <h2>Success</h2>
+              <p>Your details captured successfully. Your temporary employee id is {{empId}}.</p>
+            </ion-label>
+          </ion-item>
+        </ion-card>
+        <ion-card>
+          <ion-item lines="none" color="secondary">
+            <ion-label class="ion-text-wrap">
+              <p>Please download our Attendify App from below link</p>
+            </ion-label>
+          </ion-item>
+          <div class="ion-padding" (click)="openPlayStore()">
+            <ion-img src="assets/imgs/play-store.png" class="store-icon"></ion-img>
+          </div>
+          <div class="ion-padding">
+            <ion-img src="assets/imgs/app-store.png" class="store-icon"></ion-img>
+          </div>
+        </ion-card>
+      </div>
+    </div>
   </div>
 </ion-content>
+<ion-footer mode="md" *ngIf="stepperIndex<5">
+  <ion-toolbar color="primary">
+    <ion-row>
+      <ion-col size="6">
+        <ion-button class="ion-text-capitalize btn" color="light" fill="outline" expand="block"
+          (click)="back()">Previous</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button class="ion-text-capitalize btn" expand="block" (click)="next()" color="secondary">Next</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-footer>

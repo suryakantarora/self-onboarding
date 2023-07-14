@@ -1,0 +1,21 @@
+<!-- <ion-header class="ion-no-border">
+  <ion-toolbar color="primary" mode="md">
+    <ion-title>Select DOB</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="clear" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header> -->
+<ion-content class="ion-text-center">
+  <ion-datetime #datetime presentation="date" [(ngModel)]="selectedDate">
+    <!-- <ion-buttons slot="buttons">
+      <ion-button color="danger" (click)="datetime.cancel()">Cancel</ion-button>
+      <ion-button color="primary" (click)="close(datetime)">All Set</ion-button>
+    </ion-buttons> -->
+  </ion-datetime>
+  <div class="ion-padding">
+    <ion-button expand="block" mode="md" class="ion-text-capitalize" [disabled]="!selectedDate" (click)="close(selectedDate)"> Select Date</ion-button>
+  </div>
+</ion-content>
